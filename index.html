@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Manchester Medicine – Semester 1 Mini Mock</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  line-height: 1.6;
+}
+
+h1 {
+  text-align: center;
+}
+
+.question {
+  display: none;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 25px;
+  border-radius: 8px;
+}
+
+.question.active {
+  display: block;
+}
+
+.option {
+  display: block;
+  margin: 6px 0;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #f9f9f9;
+  cursor: pointer;
+}
+
+.option.correct {
+  background: #d1fae5;
+  border-color: #22c55e;
+}
+
+.option.wrong {
+  background: #fee2e2;
+  border-color: #ef4444;
+}
+
+.option.locked {
+  cursor: not-allowed;
+  opacity: 0.85;
+}
+
+.feedback {
+  margin-top: 10px;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+  display: none;
+}
+
+#final-score {
+  display: none;
+  text-align: center;
+}
+</style>
+
+<script>
+let currentQuestion = 0;
+let score = 0;
+const questions = [];
+let nextBtn;
+
+window.onload = () => {
+  document.querySelectorAll(".question").forEach(q => questions.push(q));
+  questions[0].classList.add("active");
+  nextBtn = document.getElementById("next-btn");
+};
+
+function selectAnswer(option, isCorrect) {
+  const question = option.closest(".question");
+  if (question.dataset.answered === "true") return;
+
+  question.dataset.answered = "true";
+
+  if (isCorrect) {
+    score++;
+    option.classList.add("correct");
+  } else {
+    option.classList.add("wrong");
+  }
+
+  question.querySelectorAll(".option").forEach(btn => {
+    btn.classList.add("locked");
+    btn.disabled = true;
+  });
+
+  question.querySelector(".feedback").style.display = "block";
+  nextBtn.style.display = "block";
+}
+
+document.addEventListener("click", function (e) {
+  if (e.target && e.target.id === "next-btn") {
+    questions[currentQuestion].classList.remove("active");
+    currentQuestion++;
+    nextBtn.style.display = "none";
+
+    if (currentQuestion < questions.length) {
+      questions[currentQuestion].classList.add("active");
+    } else {
+      showFinalScore();
+    }
+  }
+});
+
+function showFinalScore() {
+  const percentage = ((score / questions.length) * 100).toFixed(0);
+
+  document.body.innerHTML = `
+    <h1>Manchester Medicine – Semester 1 Mini Mock</h1>
+    <h2>Final Score: ${score}/${questions.length}  or  ${percentage}%</h2>
+    
+    <p><strong>Thanks so much for completing this mini mock! I really hope it was helpful. If you have any questions or feedback, please message the instagram @ManchesterHaemsoc</strong></p>
+  `;
+}
+</script>
+
+
+
+<!-- ALL 50 QUESTIONS BELOW -->
+<!-- UNCHANGED CONTENT -->
+<!-- (Your pasted Question 1–50 blocks go here EXACTLY as provided) -->
+</head>
+
+<body>
+
+<h1>Manchester Medicine – Semester 1 Mini Mock</h1>
+<h4>Made by Manchester HaemSoc</h4>
+
+<!-- ================= QUESTIONS START HERE ================= -->
+
+<!-- QUESTIONS WILL BE INSERTED IN BLOCKS -->
+ <!-- Question 1 -->
+<div class="question">
+  <p><strong>1) A 24 year old pregnant woman receives the results of her 12 week combined test. Which of the following results would indicate a higher risk of Down syndrome?</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, false)">Decreased Nuchal translucency</button>
+  <button class="option" onclick="selectAnswer(this, false)">Increased PAPP-A</button>
+  <button class="option" onclick="selectAnswer(this, false)">Increased AFP (α-fetoprotein)</button>
+  <button class="option" onclick="selectAnswer(this, true)">Increased β-hCG</button>
+
+  <div class="feedback" style="display:none;">
+    <p><strong>Correct answer: Increased β-hCG</strong></p>
+    <p>β-hCG is increased in trisomy 21. In trisomy 21, remember “HIgh” for High levels of “H”cg and “I”nhibin A.</p>
+    <p>In the 12 week combined test, β-hCG and PAPP-A and nuchal translucency are tested.</p>
+    <p>In the 20 week quadruple test, AFP, β-hCG, uE3 and inhibin A are tested.</p>
+    <p>Remember the down syndrome results:</p>
+    <ul>
+      <li>Increase in β-hCG</li>
+      <li>Decrease in PAPP-A</li>
+      <li>Increased nuchal translucency</li>
+      <li>Decreased AFP</li>
+      <li>Decreased uE3</li>
+      <li>Increased inhibin A</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Question 2 -->
+<div class="question">
+  <p><strong>2) A 5 year old boy presents to the GP with frequent chest infections and stomach pains. He is evidently short of breath and has been coughing repeatedly. His mother mentions that his stool appears light coloured, oily and floats in the toilet bowl. What is the most appropriate option as a first line and immediate investigation for this patient?</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, true)">Chloride sweat test</button>
+  <button class="option" onclick="selectAnswer(this, false)">Genetic testing for CFTR gene</button>
+  <button class="option" onclick="selectAnswer(this, false)">Heel prick blood test</button>
+  <button class="option" onclick="selectAnswer(this, false)">High resolution CT thorax</button>
+
+  <div class="feedback" style="display:none;">
+    <p>The most likely diagnosis is cystic fibrosis. When presented in the community, the firstline investigation is a chloride sweat test due to its high specificity. Sweat is triggered by pilocarpine (a muscarinic agonist) and will be unusually high in chloride levels due to CFTR dysfunction.</p>
+    <p>Genetic testing would be more definitive but is not a standard firstline investigation.</p>
+    <p>The heel prick blood test is done for newborn babies at 5 days. This child is 5 years too old.</p>
+    <p>A high resolution CT thorax is not indicated in cystic fibrosis. It can be indicated for cases of idiopathic pulmonary fibrosis.</p>
+  </div>
+</div>
+
+<!-- Question 3 -->
+<div class="question">
+  <p><strong>3) The investigation comes back positive for cystic fibrosis. What is the most likely gene mutation that has occurred</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, true)">Triplet Deletion in chromosome 7</button>
+  <button class="option" onclick="selectAnswer(this, false)">Point Deletion of a single base pair in chromosome 6</button>
+  <button class="option" onclick="selectAnswer(this, false)">Nonsense mutation in chromosome 6</button>
+  <button class="option" onclick="selectAnswer(this, false)">Triplet Insertion in chromosome 7</button>
+
+  <div class="feedback" style="display:none;">
+    <p>The most common mutation in cystic fibrosis is del F508 which is a deletion of a triplet of base pairs on chromosome 7 resulting in the loss of phenylalanine from the CFTR protein. The dysfunctional CFTR protein is unable to travel to the cell surface.</p>
+  </div>
+</div>
+
+<!-- Question 4 -->
+<div class="question">
+  <p><strong>4) A known HIV-positive patient comes to the hospital for a routine blood test. He has poor adherence to his ART therapy and his CD4 count is 145 cells/µL. The doctor would like to begin antibiotic prophylaxis. Which medication is most likely initiated?</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, false)">Amoxicillin</button>
+  <button class="option" onclick="selectAnswer(this, false)">Clarithromycin</button>
+  <button class="option" onclick="selectAnswer(this, false)">Tazobactam/Piperacillin</button>
+  <button class="option" onclick="selectAnswer(this, true)">TMP-SMX (Trimethoprim-Sulfamethoxazole)</button>
+
+  <div class="feedback" style="display:none;">
+    <p>TMP-SMX is first line for prophylaxis against opportunistic infections in patients with poorly controlled HIV and a CD4 count &lt; 200 cells/µL. The most relevant opportunistic infection at this CD4 count is Pneumocystis jirovecii, as it can cause pneumonia and high mortality.</p>
+    <p>Although Pneumocystis jirovecii is a fungus, TMP-SMX is able to inhibit its de novo folate synthesis.</p>
+    <p>Since Pneumocystis jirovecii is a fungus, penicillins such as amoxicillin and piperacillin will not be effective.</p>
+    <p>Pneumocystis also has 80S ribosomes instead of 50s so macrolides like clarithromycin are also ineffective.</p>
+    <p>Tazobactam and piperacillin are a combination of antibiotics commonly used in sepsis.</p>
+  </div>
+</div>
+
+<!-- Question 5 -->
+<div class="question">
+  <p><strong>5) A medical student is learning about the circulation and breathing mechanism in a foetus. Which of the following statements are true?</strong></p>
+
+  <p>1. The ductus venosus bypasses the lungs and allows for deoxygenated to move straight from the pulmonary artery to the ascending aorta<br>
+     2. There are two umbilical arteries and only one umbilical vein<br>
+     3. The foramen ovale closes after the baby’s first breath to become the fossa ovalis
+  </p>
+
+  <button class="option" onclick="selectAnswer(this, false)">Statements 1, 2, 3</button>
+  <button class="option" onclick="selectAnswer(this, false)">Statements 1, 2</button>
+  <button class="option" onclick="selectAnswer(this, true)">Statements 2, 3</button>
+  <button class="option" onclick="selectAnswer(this, false)">Statement 3 only</button>
+
+  <div class="feedback" style="display:none;">
+    <p>Statement 1 is incorrect because the ductus venosus bypasses the liver, not the lungs. This is done by the ductus arteriosus, connecting the pulmonary artery to the aorta.
+</p>
+    <p>Recall that the umbilical vein confusingly brings oxygenated blood to the fetus (from the placenta) and the umbilical arteries bring deoxygenated blood back to the mother. This is because they technically belong to the fetus and thus are named appropriately to whether they are travelling to or from the fetus' heart.
+</p>
+    <p>If the foramen ovale does not close, it can lead to PFO (Patent Foramen Ovale) which can be asymptomatic or cause paradoxical embolisms.</p>
+  </div>
+</div>
+
+<!-- Question 6 -->
+<div class="question">
+  <p><strong>6) An 18 year old girl comes into the GP explaining how she feels concerned about a notable lack of breast development. After further questioning she reveals that she has not yet began to menstruate. She has webbing skin between the neck and shoulders and a short stature. Which genetic karyotype is most likely to cause this presentation?</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, false)">46 XX</button>
+  <button class="option" onclick="selectAnswer(this, false)">47 XYY</button>
+  <button class="option" onclick="selectAnswer(this, true)">45 XO</button>
+  <button class="option" onclick="selectAnswer(this, false)">47 XXY</button>
+
+  <div class="feedback" style="display:none;">
+    <p>45 XO is the karyotype known as Turner’s syndrome. It is the most common cause of primary amenorrhea and physically present with a short stature, webbed neck and low set ears. There are no preventive measures available for this condition. Hormone replacement of growth hormone, oestrogen and progesterone can provide some symptomatic management.</p>
+    <p>46 XX is the normal karyotype for a woman.</p>
+    <p>47 XYY is Jacobs syndrome. Individuals are male and can be asymptomatic. Those that present with symptoms can be taller than average and can have delayed intellectual development.</p>
+    <p>47 XXY is Klinefelter’s syndrome. Individuals are male and are often taller than normal with longer limbs. They can have delayed or incomplete sexual organ development with decreased pubic hair and potential gynaecomastia.</p>
+  </div>
+</div>
+
+<!-- Question 7 -->
+<div class="question">
+  <p><strong>7) Constipation is very common during pregnancy as early as the first trimester and is often worse around the second or third month. What is the physiological mechanism behind constipation during pregnancy?</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, false)">Surge in βhCG produced by the placenta after implantation</button>
+  <button class="option" onclick="selectAnswer(this, true)">Progesterone produced by the corpus luteum</button>
+  <button class="option" onclick="selectAnswer(this, false)">Rising oestrogen levels reducing bowel motility</button>
+  <button class="option" onclick="selectAnswer(this, false)">Increased red blood cell production causing increased vascularisation of the gut</button>
+
+  <div class="feedback" style="display:none;">
+    <p>Elevated progesterone levels secreted predominantly from the corpus luteum decrease peristaltic activity of gastrointestinal smooth muscle cells.</p>
+    <p>The surge in βhCG is strongly associated to morning sickness.</p>
+    <p>Oestrogen does not have a large role in bowel motility during pregnancy and neither does increased RBC production.</p>
+  </div>
+</div>
+
+<!-- Question 8 -->
+<div class="question">
+  <p><strong>8) A group of 1st year medical students are working on a project about the most common genes associated with breast cancer. The genes they are working on are a pair of tumour suppressor genes that normally help repair double stranded DNA breaks. What is the inheritance pattern of these two gene mutations?</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, true)">Autosomal Dominant</button>
+  <button class="option" onclick="selectAnswer(this, false)">Autosomal Recessive</button>
+  <button class="option" onclick="selectAnswer(this, false)">X-Linked Dominant</button>
+  <button class="option" onclick="selectAnswer(this, false)">X-Linked Recessive</button>
+
+  <div class="feedback" style="display:none;">
+    <p>The most common gene mutations of breast cancer are BRCA1 and BRCA2. They have an autosomal dominant inheritance pattern.</p>
+  </div>
+</div>
+
+<!-- Question 9 -->
+<div class="question">
+  <p><strong>9) Which term best describes a new, irreversible, and autonomous proliferation of cells, which persists independently of the original stimulus and is seen in tumours?</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, false)">Hyperplasia</button>
+  <button class="option" onclick="selectAnswer(this, false)">Dysplasia</button>
+  <button class="option" onclick="selectAnswer(this, true)">Neoplasia</button>
+  <button class="option" onclick="selectAnswer(this, false)">Metaplasia</button>
+
+  <div class="feedback" style="display:none;">
+    <p>Neoplasia is the final stage of a tumour becoming a carcinoma. It is the new, irreversible, autonomous proliferation of cells that can be well differentiated or abnormal. This means neoplasia can be benign or malignant.
+
+</p><p>Hyperplasia is the proliferation of the number of cells and is not always pathological (e.g. thickening of the uterus in the luteal phase)
+
+</p><p>Metaplasia is the reversible changing of cell type with another cell type. For example, GERD can cause stratified squamous cells to be replaced by columnar epithelium in a condition known as Barrett’s oesophagus.
+
+</p><p>Dysplasia is the precancerous disordered growth and maturation of epithelial cells. It is potentially reversible if the inciting stimulus is removed. Think of it as “just before cancer”.
+</p>
+  </div>
+</div>
+
+<!-- Question 10 -->
+<div class="question">
+  <p><strong>10) Once an antibody attaches to a surface antigen on a bacteria, which region of the antibody interacts with phagocytes such as macrophages and neutrophils to initiate phagocytosis?</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, true)">Fc region (fragment of crystallization)</button>
+  <button class="option" onclick="selectAnswer(this, false)">Fab region (fragment of antigen-binding)</button>
+  <button class="option" onclick="selectAnswer(this, false)">Hinge region</button>
+  <button class="option" onclick="selectAnswer(this, false)">Variable region</button>
+
+  <div class="feedback" style="display:none;">
+    <p>The Fc region is the stem of the antibody that phagocytes can bind to. It’s the end that is always shaped like a stick/line.
+
+<p>The Fab region is the region that binds to the antigen, consisting of one light chain and a portion of a heavy chain.
+
+</p><p>The hinge region is a stretch of heavy chains between Fc and Fab regions that looks like a hinge.
+
+</p><p>The variable region is the part of an antibody's polypeptide chain that has a unique amino acid sequence and forms the antigen-binding site
+</p>
+  </div>
+</div>
+<!-- Question 11 -->
+<div class="question">
+  <p><strong>11) A 12 year old boy lands on an outstretched hand in an attempt to break his fall whilst skateboarding. The clinician identifies a “dinner fork” deformity and comes to the diagnosis of a Colles Fracture. Which of the following locations is this fracture present?</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, false)">5th metacarpal and trapezium</button>
+  <button class="option" onclick="selectAnswer(this, true)">Distal Radius</button>
+  <button class="option" onclick="selectAnswer(this, false)">Proximal Radius</button>
+  <button class="option" onclick="selectAnswer(this, false)">Distal humerus</button>
+
+  <div class="feedback" style="display:none;">
+    <p>A Colles fracture is a fracture of the distal radius, most commonly caused due to a fall of the outstretched hand. This topic appeared in my sem test 2 years ago.</p>
+    <p>Note the 5th metacarpal and trapezium are not near each other, but a fracture of the 5th metacarpal is common in boxing.</p>
+    <p>A fracture of the proximal radius (usually of the radial head) is a common fracture of the elbow, particularly in children and the elderly. This can also be caused by falling on an outstretched hand but the dinner fork abnormality is pathognomonic for a Colles fracture.</p>
+    <p>A fracture of the distal humerus accounts for 30% of elbow fractures.</p>
+  </div>
+</div>
+
+<!-- Question 12 -->
+<div class="question">
+  <p><strong>12) The pudendal nerve exits the pelvic cavity via which foramen?</strong></p>
+
+  
+  <button class="option" onclick="selectAnswer(this, false)">Lesser sciatic foramen</button>
+  <button class="option" onclick="selectAnswer(this, false)">Obturator Foramen</button>
+  <button class="option" onclick="selectAnswer(this, false)">Pelvic brim</button>
+  <button class="option" onclick="selectAnswer(this, true)">Greater sciatic foramen</button>
+
+  <div class="feedback" style="display:none;">
+    <p>The pudendal nerve exits the pelvic cavity via the greater sciatic foramen, below the piriformis muscles. It then reenters via the lesser sciatic foramen to innervate the pelvic floor muscles, sphincter muscles and provide sensation to the perineum.</p>
+    <p>The obturator foramen is positioned anteriorly (compared to the posterior sciatic foramina) and contains the obturator nerve and membrane.</p>
+    <p>The pelvic brim is an anatomical landmark marking the boundary between the true and false pelvis. It is not a foramen.</p>
+  </div>
+</div>
+
+<!-- Question 13 -->
+<div class="question">
+  <p><strong>13) A 30 year old woman who is attempting to conceive purchases a urine test from Sainsbury’s. Which hormone surge indicates that she is ovulating?</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, true)">LH</button>
+  <button class="option" onclick="selectAnswer(this, false)">FSH</button>
+  <button class="option" onclick="selectAnswer(this, false)">Oestrogen</button>
+  <button class="option" onclick="selectAnswer(this, false)">β-hCG</button>
+
+  <div class="feedback" style="display:none;">
+    <p>An LH surge triggers ovulation and LH level drop back down immediately after</p>
+    <p>FSH also rises during ovulation but not nearly as high.</p>
+    <p>Oestrogen has a pre LH surge that causes the surge in LH. However this surge plateaus and is unreliable in tracking menstrual cycle</p>
+    <p>β-hCG released from the syncytiotrophoblast cells in the placenta and is used to detect pregnancy</p>
+  </div>
+</div>
+
+<!-- Question 14 -->
+<div class="question">
+  <p><strong>14) Which of the following statements about bone homeostasis are true?</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, false)">Bone homeostasis is an example of a positive feedback loop</button>
+  <button class="option" onclick="selectAnswer(this, false)">Calcitonin released from the thyroid glands act to increase calcium levels in the blood</button>
+  <button class="option" onclick="selectAnswer(this, true)">Osteoprotegerin (OPG) acts to reduces bone resorption by inhibiting the activation of osteoclasts</button>
+  <button class="option" onclick="selectAnswer(this, false)">Osteoporosis is an issue with a deficiency in collagen causing defunct bone homeostasis</button>
+
+  <div class="feedback" style="display:none;">
+    <p>Osteoprotegerin (OPG) acts as a decoy, binding to RANKL which would otherwise bind to RANK on osteoclast precursors, activating them.</p>
+    <p>Calcitonin is released from the thyroid glands but decreases calcium levels</p>
+    <p>Bone homeostasis is an example of a negative feedback loop</p>
+    <p>Osteoporosis is an issue with defunct bone homeostasis but is not a collagen deficiency issue. It is caused by osteoclast activity outweighing osteoblast activity due to factors such as aging, menopause, steroid use, genetics and lifestyle factors</p>
+  </div>
+</div>
+
+<!-- Question 15 -->
+<div class="question">
+  <p><strong>15) Which of the following individuals most accurately meets the clinical definition of frailty?</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, false)">An 88 year old woman who remains active, walks 2 miles daily, and has slight hypertension</button>
+  <button class="option" onclick="selectAnswer(this, true)">A 76 year old man with multiple comorbidities who becomes acutely confused and immobile after a mild urinary tract infection.</button>
+  <button class="option" onclick="selectAnswer(this, false)">A 40 year old woman with severe depression and social withdrawal but normal physical health.</button>
+  <button class="option" onclick="selectAnswer(this, false)">A 33 year old bilateral leg amputee who uses prostheses and works full-time with well-controlled hypertension.</button>
+
+  <div class="feedback" style="display:none;">
+    <p>Frailty is defined as a high vulnerability to health stressors and a reduced ability to recover from them due to a loss of inbuilt reserves. The 76 year old man best describes this definition as a mild UTI causes confusion and immobility which is an unusually adverse reaction.</p>
+  </div>
+</div>
+
+<!-- Question 16 -->
+<div class="question">
+  <p><strong>16) A 45 year old type 1 diabetic takes insulin before her meal. How does this drug act on tissues at a cellular level?</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, false)">Diffuses through the phospholipid bilayer to act as a transcription factor</button>
+  <button class="option" onclick="selectAnswer(this, false)">Binds onto Gs coupled proteins to increase cAMP levels via adenylyl cyclase</button>
+  <button class="option" onclick="selectAnswer(this, false)">Binds onto Gq coupled proteins to release IP3 and DAG secondary messengers causing downstream Ca2+release</button>
+  <button class="option" onclick="selectAnswer(this, true)">Binds onto tyrosine kinase receptors causing downstream phosphorylation</button>
+
+  <div class="feedback" style="display:none;">
+    <p>Insulin is a hormone that binds onto tyrosine kinase receptors. Other examples of hormones that bind to TKRs are IGF-1, VEGF (Vascular endothelial growth factors) , FGF (Fibroblast growth factors)</p>
+    <p>Steroid hormones are lipid soluble and pass through the phospholipid bilayer to act directly as a transcription factors. Examples include testosterone, cortisol, oestrogen, progesterone, aldosterone</p>
+    <p>Hormones that bind to Gs couple proteins include glucagon, PTH and calcitonin</p>
+    <p>Hormones that bind to Gq couple proteins include GnRH, kisspeptin</p>
+    <p>ADH also binds to Gq and Gs coupled proteins</p>
+  </div>
+</div>
+
+<!-- Question 17 -->
+<div class="question">
+  <p><strong>17) A rare long term autoimmune disorder where the adrenal glands are unable to produce enough cortisol and aldosterone is best described by which term?</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, true)">Addison’s disease</button>
+  <button class="option" onclick="selectAnswer(this, false)">Cushing’s disease</button>
+  <button class="option" onclick="selectAnswer(this, false)">Adrenal crisis</button>
+  <button class="option" onclick="selectAnswer(this, false)">Pheochromocytoma</button>
+
+  <div class="feedback" style="display:none;">
+    <p>Addison’s disease is most commonly an autoimmune disorder causing adrenal insufficiency.</p>
+    <p>Cushing’s disease where a benign tumour in the pituitary gland causes overproduction of ACTH, overstimulating the adrenal glands to produce excess cortisol. Notably, Cushing’s disease is different to Cushing’s syndrome. Cushing’s syndrome is the set of effects caused by excess cortisol and Cushing’s syndrome is the specific cause of Cushing’s syndrome - a pituitary adenoma.</p>
+    <p>Adrenal crisis is a life threatening medical emergency occurs when the body’s cortisol levels drop dangerously low, often caused by infection or chronic steroid therapy</p>
+    <p>Pheochromocytoma is tumour on the adrenal gland causing excess catecholamines (primarily adrenaline) causing the 5 P’s – Pain (headache), Pallor, Pressure (hypertension), Palpitations, Perspiration</p>
+  </div>
+</div>
+
+<!-- Question 18 -->
+<div class="question">
+  <p><strong>18) A pregnant woman comes into the doctors for her 20 week scan. The top of the babies head most likely reaches which anatomical landmark?</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, false)">Pubic symphysis</button>
+  <button class="option" onclick="selectAnswer(this, true)">Umbilicus (belly button)</button>
+  <button class="option" onclick="selectAnswer(this, false)">Xiphoid process of the sternum</button>
+  <button class="option" onclick="selectAnswer(this, false)">Angle of Louis</button>
+
+  <div class="feedback" style="display:none;">
+    <p>If you know your anatomy, this question is between two answers – the umbilicus and the xiphoid process. The fundus reaches the xiphoid process when fundal height peaks at 36 weeks. The fundal height actually begins to regress after this.</p>
+    <p>The fundal height reaches the pubic symphysis at 12 weeks</p>
+    <p>The angle of louis is the prominent turn on the sternum at the level of the 2nd intercostal space. That would be a very ectopic pregnancy. You will use this landmark to perform respiratory and cardiac exams in the future</p>
+  </div>
+</div>
+
+<!-- Question 19 -->
+<div class="question">
+  <p><strong>19) A combination of mifepristone and misoprostol can be taken for a medical abortion. What is the mechanism of action of mifepristone?</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, true)">Competitively antagonises progesterone receptors</button>
+  <button class="option" onclick="selectAnswer(this, false)">Non-competitive inhibition of oestrogen receptors</button>
+  <button class="option" onclick="selectAnswer(this, false)">Creating a sudden surge of LH release from the pituitary gland</button>
+  <button class="option" onclick="selectAnswer(this, false)">Altering the acid base balance in the uterus</button>
+
+  <div class="feedback" style="display:none;">
+    <p>Mifepristone primarily acts by blocking progesterone receptors. This is the active drug that causes the abortion as progesterone is needed to prevent the endometrium shedding. Misoprostol is a prostaglandin analogue that helps expel the contents of the uterus and aid cervical softening and muscle healing.</p>
+  </div>
+</div>
+
+<!-- Question 20 -->
+<div class="question">
+  <p><strong>20) Which of the following is correct about tumour suppressor genes such as the Rb (retinoblastoma) gene?</strong></p>
+
+  
+  <button class="option" onclick="selectAnswer(this, false)">Retinoblastoma is an example of a proto-oncogene as it is not innately oncogenic but a mutation can lead to oncogenesis</button>
+  <button class="option" onclick="selectAnswer(this, true)">Someone born with one mutated tumour suppressor allele normally requires a subsequent mutation for a cancer to develop</button>
+  <button class="option" onclick="selectAnswer(this, false)">C-myc is an example of a tumour suppressor gene</button>
+  <button class="option" onclick="selectAnswer(this, false)">Tumour suppressor genes can cause sudden cell growth and drive excessive cell proliferation</button>
+
+  <div class="feedback" style="display:none;">
+    <p>This is Knudson’s two hit hypothesis, that tumour suppressor genes require both alleles to be inactivated to cause a phenotypic change</p>
+    <p>Tumour suppressor genes themselves do not drive proliferation like oncogenes, they act as the brakes by regulating cell growth and apoptosis.</p>
+    <p>Retinoblastoma is an example of a tumour suppressor gene as stated in the question</p>
+    <p>C-myc is an example of an oncogene that is prevalent in Burkitt’s lymphoma</p>
+  </div>
+</div>
+<!-- Question 21 -->
+<div class="question">
+  <p><strong>21) A 40 year old man undergoes genetic screening and finds out he is a carrier of the cystic fibrosis gene. His wife’s mother had cystic fibrosis but his wife does not. What is the percentage chance that their child will have cystic fibrosis?</strong></p>
+
+  
+  <button class="option" onclick="selectAnswer(this, false)">50%</button>
+  <button class="option" onclick="selectAnswer(this, false)">100%</button>
+  <button class="option" onclick="selectAnswer(this, true)">25%</button>
+  <button class="option" onclick="selectAnswer(this, false)">More information required</button>
+
+  <div class="feedback" style="display:none;">
+    <p>25% is correct because CF is autosomal recessive. There is a 50% chance that the heterozygous father passes on his CF allele and his wife must also be heterozygous if her mother had CF. Therefore if both parents are heterozygous for the CF gene, there is a 25% chance that both parents pass on the CF allele.</p>
+  </div>
+</div>
+
+<!-- Question 22 -->
+<div class="question">
+  <p><strong>22) An 82 year old woman who is taking corticosteroids for giant cell arteritis presents to the doctor with a long standing condition which makes her susceptible to fractures, even in low impact trauma. What investigation would be most suitable to assess this long standing disease?</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, true)">DEXA</button>
+  <button class="option" onclick="selectAnswer(this, false)">CT Thorax, Abdomen, Pelvis</button>
+  <button class="option" onclick="selectAnswer(this, false)">Full blood count</button>
+  <button class="option" onclick="selectAnswer(this, false)">Bioelectrical Impedance Analysis</button>
+
+  <div class="feedback" style="display:none;">
+    <p>This is most likely osteoporosis. Her age, gender, postmenopausal status and steroid therapy are strong risk factors. Osteoporosis is the major cause of fractures in the elderly. DEXA is a dual x-ray used to diagnose, assess risk, and assess prognosis of osteoporosis.</p>
+    <p>CT TAP would be an unnecessary level of radiation to assess osteoporosis firstline</p>
+    <p>FBC would not accurately assess osteoporosis</p>
+    <p>BIA is used to assess body composition, normal to evaluate nutritional status</p>
+  </div>
+</div>
+
+<!-- Question 23 -->
+<div class="question">
+  <p><strong>23) A 19 year old woman breaks her elbow after cycling into a pedestrian on curry mile. X-rays reveal a fracture of her right medial epicondyle. She is unable to extend her 4th and 5th MCP joints making her right hand appear “claw-like”. Which nerve is most likely to have been damaged?</strong></p>
+
+  
+  <button class="option" onclick="selectAnswer(this, false)">Median Nerve</button>
+  <button class="option" onclick="selectAnswer(this, false)">Brachial Nerve</button>
+  <button class="option" onclick="selectAnswer(this, false)">Radial Nerve</button>
+  <button class="option" onclick="selectAnswer(this, true)">Ulnar Nerve</button>
+
+  <div class="feedback" style="display:none;">
+    <p>The ulnar nerve runs in close proximity to the medial epicondyle and injury can present as a “claw hand” where the 4th and 5th digits can not fully extend.</p>
+    <p>The brachial nerve is technically not a thing but the brachial plexus I’m sure you have heard of.</p>
+    <p>Other important anatomical associations in upper limb injuries include:</p>
+    <ul>
+      <li>radial nerve and a midshaft fracture of the humerus</li>
+      <li>axillary nerve and a fracture of the neck humerus</li>
+      <li>median nerve and carpal tunnel syndrome</li>
+      <li>compression of the armpit and radial nerve palsy. Often occurs when someone passes out on a chair and subsequently called Saturday Night Palsy</li>
+    </ul>
+    <p>These are high yield and very clinically relevant. Learn and remember them for future exams too.</p>
+  </div>
+</div>
+
+<!-- Question 24 -->
+<div class="question">
+  <p><strong>24) A 15 year old man presents to the GP concerned about having a lack of pubic hair and secondary sexual characteristics. Which system can be used to measure puberty in men?</strong></p>
+
+  
+  <button class="option" onclick="selectAnswer(this, false)">GRACE score</button>
+  <button class="option" onclick="selectAnswer(this, false)">CHA2DS2-VASc</button>
+  <button class="option" onclick="selectAnswer(this, true)">Tanner scale</button>
+  <button class="option" onclick="selectAnswer(this, false)">Well’s score</button>
+
+  <div class="feedback" style="display:none;">
+    <p>Tanner’s scale is used to measure puberty by assessing pubic hair growth and genitalia development in males and breast development in females.</p>
+    <p>GRACE score estimates 6 month mortality for patients with acute coronary syndrome</p>
+    <p>CHA2DS2-VASc is used to assess risk of stroke with atrial fibrillation</p>
+    <p>Well’s score assesses risk of DVT and PE</p>
+  </div>
+</div>
+
+<!-- Question 25 -->
+<div class="question">
+  <p><strong>25) Which of the following drugs would reduce urine output?</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, true)">Fludrocortisone</button>
+  <button class="option" onclick="selectAnswer(this, false)">Prednisolone</button>
+  <button class="option" onclick="selectAnswer(this, false)">Indapamide</button>
+  <button class="option" onclick="selectAnswer(this, false)">Trastazumab</button>
+
+  <div class="feedback" style="display:none;">
+    <p>Fludrocortisone is a mineralocorticoid mimicking the effects of aldosterone. It will directly act on the kidneys to promote sodium and water retention. It is indicated in conditions such as adrenal insufficiency and orthostatic hypotension.</p>
+    <p>Prednisolone on the other hand is mainly a glucocorticoid, not primarily affecting the kidneys</p>
+    <p>Indapamide is a thiazide like diuretic that would increase urine output</p>
+    <p>Trastazumab is a monoclonal antibody indicated in HER2 positive breast cancer. It should not affect urine output.</p>
+  </div>
+</div>
+
+<!-- Question 26 -->
+<div class="question">
+  <p><strong>26) Which of the following statements are true regarding pregnancy?</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, false)">There is a decrease in red blood cell turnover, potentially causing anaemia</button>
+  <button class="option" onclick="selectAnswer(this, true)">There is an increase in cardiac output</button>
+  <button class="option" onclick="selectAnswer(this, false)">There is a decrease in kidney function and GFR (Glomerular filtration rate)</button>
+  <button class="option" onclick="selectAnswer(this, false)">There is a decrease in visual acuity due to increased intraocular pressure</button>
+
+  <div class="feedback" style="display:none;">
+    <p>Cardiac output increases by 30-50% as both stroke volume and heart rate increase. Recall that CO = SV x HR</p>
+    <p>There is an increase in RBC turnover</p>
+    <p>There is an increase in GFR by around 50%</p>
+    <p>Intraocular pressure can actually decrease due to hormonal changes</p>
+  </div>
+</div>
+
+<!-- Question 27 -->
+<div class="question">
+  <p><strong>27) What condition is actively prevented by taking folic acid supplements 3 months before and 3 months after conception?</strong></p>
+
+  
+  <button class="option" onclick="selectAnswer(this, false)">Cleft palate</button>
+  <button class="option" onclick="selectAnswer(this, false)">Marfan’s syndrome</button>
+  <button class="option" onclick="selectAnswer(this, true)">Spina bifida</button>
+  <button class="option" onclick="selectAnswer(this, false)">Hip dysplasia</button>
+
+  <div class="feedback" style="display:none;">
+    <p>Lack of folic acid increases the risk of neural tube defects, most commonly spina bifida. This is due to the failure of the neural tube closing between day 21 and day 28</p>
+  </div>
+</div>
+
+<!-- Question 28 -->
+<div class="question">
+  <p><strong>28) The genitourinary system comes from which embryonic origin?</strong></p>
+
+  
+  <button class="option" onclick="selectAnswer(this, false)">Ectoderm</button>
+  <button class="option" onclick="selectAnswer(this, true)">Mesoderm</button>
+  <button class="option" onclick="selectAnswer(this, false)">Endoderm</button>
+  <button class="option" onclick="selectAnswer(this, false)">Neural Crest Cells</button>
+
+  <div class="feedback" style="display:none;">
+    <p>The mesoderm derivatives include muscle, bone, spleen, blood, heart, kidneys, gonads</p>
+    <p>The ectoderm derivatives include skin, hair, nails, lens, enamel</p>
+    <p>The endoderm derivatives include the gut & respiratory epithelium and the liver, pancreas, thyroid, parathyroid, bladder, urethra</p>
+    <p>NCC’s derive the PNS and a bunch of random shit</p>
+  </div>
+</div>
+
+<!-- Question 29 -->
+<div class="question">
+  <p><strong>29) Which of the following does NOT necessarily need to apply in order to break confidentiality of a patient’s HIV status in the interest of public health?</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, false)">They have had a high viral load</button>
+  <button class="option" onclick="selectAnswer(this, false)">They know they have HIV</button>
+  <button class="option" onclick="selectAnswer(this, false)">They do not perform safe sex</button>
+  <button class="option" onclick="selectAnswer(this, true)">They are homosexual</button>
+
+  <div class="feedback" style="display:none;">
+    <p>In England and Wales, there must be evidence of HIV infection (not U=U) from a person if all of the following apply:</p>
+    <ul>
+      <li>You had sex with someone who didn’t know you had HIV.</li>
+      <li>You knew you had HIV at that time.</li>
+      <li>You understood how HIV is transmitted.</li>
+      <li>You had sex without a condom.</li>
+      <li>You transmitted HIV to that person</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Question 30 -->
+<div class="question">
+  <p><strong>30) A 51 year old woman comes into the clinic presenting with intermittent hot flashes, night sweats, sleeping difficulties and mood swings for the past 12 months since her periods stopped. After further questioning, she also mentions weight gain, vaginal dryness and decreased libido. What is the most likely diagnosis?</strong></p>
+
+  
+  <button class="option" onclick="selectAnswer(this, false)">Cervical cancer</button>
+  <button class="option" onclick="selectAnswer(this, false)">Premature ovarian insufficiency</button>
+  <button class="option" onclick="selectAnswer(this, true)">Normal menopausal symptoms</button>
+  <button class="option" onclick="selectAnswer(this, false)">Premenstrual dysphoric disorder (PMDD)</button>
+
+  <div class="feedback" style="display:none;">
+    <p>Her age is typical for menopause, ruling out premature ovarian insufficiency which would present with menopause-like symptoms before 40.</p>
+    <p>Hot flashes, night sweats, sleep disturbance, mood swings, weight gain, vaginal dryness and decreased libido are all classic symptoms of menopause. She also mentioned that her periods stopped 12 months ago.</p>
+    <p>PMDD is linked to the luteal phase of the menstrual cycle and would present with abdominal bloating, breast pain, cramping and severe changes in mood and appetite that affect day to day life.</p>
+    <p>Cervical cancer would present with postcoital bleeding, abnormal discharge and pelvic pain. It is also strongly associated with HPV16 and 18.</p>
+  </div>
+</div>
+<!-- Question 31 -->
+<div class="question">
+  <p><strong>31) By law, at what age are children considered to be unable to consent to sexual activity?</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, false)">Under 7</button>
+  <button class="option" onclick="selectAnswer(this, true)">Under 13</button>
+  <button class="option" onclick="selectAnswer(this, false)">Under 16</button>
+    <button class="option" onclick="selectAnswer(this, false)">Under 18</button>
+
+
+  <div class="feedback" style="display:none;">
+    <p>No explanation, just learn this. If you picked under 7 seriously reconsider this degree and put the fries in the bag bro</p>
+  </div>
+</div>
+
+<!-- Question 32 -->
+<div class="question">
+  <p><strong>32) Which of the following muscles is part of the rotator cuff group?</strong></p>
+  <button class="option" onclick="selectAnswer(this, true)">Teres Minor</button>
+
+  <button class="option" onclick="selectAnswer(this, false)">Latissimus Dorsi</button>
+  <button class="option" onclick="selectAnswer(this, false)">Deltoid</button>
+  <button class="option" onclick="selectAnswer(this, false)">Levator Scapulae</button>
+
+  <div class="feedback" style="display:none;">
+    <p>Teres minor is the 4th muscle of the rotator cuff muscles alongside supraspinatus, infraspinatus and subscapularis; not to be confused with teres major.</p>
+  </div>
+</div>
+
+<!-- Question 33 -->
+<div class="question">
+  <p><strong>33) In adults with cystic fibrosis, which of the following organisms is the most significant pathogen that causes repeated chronic infections?</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, false)">Influenza A virus</button>
+  <button class="option" onclick="selectAnswer(this, true)">Pseudomonas aeruginosa</button>
+  <button class="option" onclick="selectAnswer(this, false)">Streptococcus pyogenes</button>
+  <button class="option" onclick="selectAnswer(this, false)">Staphylococcus aureus</button>
+
+  <div class="feedback" style="display:none;">
+    <p>Pseudomonas aeruginosa is the most dominant pathogen in CF patients over 16. Pseudomonas can cause biofilms making antibiotic less effective. It is a gram negative, rod shaped bacterium.</p>
+    <p>During infancy staphylococcus aureus is the most dominant pathogen and is treated with flucloxacillin.</p>
+    <p>Influenza A is the most common cause of typical flu in most of the population.</p>
+    <p>Streptococcus pyogenes is a group a streptococcus and causes many troublesome infections such as scarlet fever.</p>
+  </div>
+</div>
+
+<!-- Question 34 -->
+<div class="question">
+  <p><strong>34) A child is able to use symbols like words and objects to represent other things and can pretend play with cars and stuffed toy animals. However, they are unable to see things from other people’s points of view and believe that everyone thinks the same way they do. They also believe that a tall skinny glass of juice contains more that a short wide one, even if the amount of juice is identical. Which stage of Piaget’s stages of cognitive development is this child currently in?</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, true)">Preoperational stage</button>
+  <button class="option" onclick="selectAnswer(this, false)">Formal Operational Stage</button>
+  <button class="option" onclick="selectAnswer(this, false)">Sensorimotor stage</button>
+  <button class="option" onclick="selectAnswer(this, false)">Concrete Operational Stage</button>
+
+  <div class="feedback" style="display:none;">
+    <p>This child is in the preoperational stage as they are able symbolise and play, but they still show egocentrism and do not understand conservation. This stage last from ages 2-7.</p>
+    <p>Sensorimotor stage begins from ages 0-2 and is when a baby learns to coordinate their body and focus on physical sensations. Key things they learn in this stage include object permanence and self recognition.</p>
+    <p>Concrete operational stage spans 7-11. Children understand conversation and can empathise other people’s feelings.</p>
+    <p>Formal operational stage follows on, but everyone may not always reach this stage. People begin to think more abstractly and deal with hypothetical problems.</p>
+  </div>
+</div>
+
+<!-- Question 35 -->
+<div class="question">
+  <p><strong>35) A 23 year old woman who is confirmed to not have cystic fibrosis wants to know whether she is a carrier of the CF gene. She is concerned about this because her biological brother has cystic fibrosis. Neither of her parents suffer from cystic fibrosis. What is the probability that she is a carrier of the CF gene?</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, true)">66%</button>
+  <button class="option" onclick="selectAnswer(this, false)">25%</button>
+  <button class="option" onclick="selectAnswer(this, false)">100%</button>
+  <button class="option" onclick="selectAnswer(this, false)">50%</button>
+
+  <div class="feedback" style="display:none;">
+    <p>This is a tricky inheritance pattern question. We know CF has an autosomal recessive inheritance. For her brother to have CF and her parents to not, both parents must be heterozygous carriers.</p>
+    <p>We know that the woman does not have CF. Therefore she is not homozygous for the CF gene. This leaves 3 options:</p>
+    <ul>
+      <li>homozygous no gene</li>
+      <li>carrier, CF gene inherited from mother</li>
+      <li>carrier, CF gene inherited from father</li>
+    </ul>
+    <p>These all have equal chance so there is a 2/3 chance that she is a carrier.</p>
+  </div>
+</div>
+
+<!-- Question 36 -->
+<div class="question">
+  <p><strong>36) A D-dimer test can be used to detect for a pulmonary embolism (blood clot in the lung). D-dimer’s use a measure of “fibrin degradation products” after a clot forms. A pulmonary embolism almost always results in an elevated D-dimer result. However, it is not very conclusive on its own as many other conditions can cause an elevated D-dimer. Which of the following statements about D-dimer’s are true?</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, false)">D-dimer’s have a high specificity but a low negative predictive value</button>
+  <button class="option" onclick="selectAnswer(this, false)">D-dimer’s are not useful because they have low specificity</button>
+  <button class="option" onclick="selectAnswer(this, false)">D-dimer’s have a low positive predictive value and a low sensitivity</button>
+    <button class="option" onclick="selectAnswer(this, true)">D-dimer’s have a high sensitivity but low specificity</button>
+
+
+  <div class="feedback" style="display:none;">
+    <p>D-dimer’s have a high sensitivity but low specificity.</p>
+    <p>Recall sensitivity = proportion of those with the disease who correctly receive a positive result, and specificity = proportion of people without the disease who correctly receive a negative result.</p>
+    <p>Therefore it is used as a “rule out test”; a negative D-dimer is useful in ruling out PE (pulmonary embolism).</p>
+    <p>D-dimer’s have a low PPV and a high NPV.</p>
+  </div>
+</div>
+
+<!-- Question 37 -->
+<div class="question">
+  <p><strong>37) What is the most common cause of Down’s Syndrome?</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, false)">Alcohol/Toxin induced DNA deformation during blastulation</button>
+  <button class="option" onclick="selectAnswer(this, true)">Nondisjunction error during meiosis causing 3rd chromosome in 21</button>
+  <button class="option" onclick="selectAnswer(this, false)">Normal egg fertilised by two sperm causing triploidy</button>
+  <button class="option" onclick="selectAnswer(this, false)">Robertsonian translocation from chromosome 14 to 21</button>
+
+  <div class="feedback" style="display:none;">
+    <p>The most common cause of trisomy 21 (Downs Syndrome) is a nondisjunction error.</p> 
+    <p>Translocation is a rare cause of trisomy 21.</p>
+    <p>Alcohol has no link to Down’s syndrome as it is purely genetic.</p>
+    <p>A normal egg being fertilised by 2 sperm cells does indeed cause triploidy, but this is having 3 copies of all chromosomes, resulting in 69 total chromosomes.</p>
+  </div>
+</div>
+
+<!-- Question 38 -->
+<div class="question">
+  <p><strong>38) Which of the following is a first-line treatment for osteoporosis?</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, false)">Tamoxifen</button>
+  <button class="option" onclick="selectAnswer(this, false)">Prednisolone</button>
+  <button class="option" onclick="selectAnswer(this, true)">Alendronate</button>
+  <button class="option" onclick="selectAnswer(this, false)">Denosumab</button>
+
+  <div class="feedback" style="display:none;">
+    <p>Alendronate is an oral bisphosphonate that is a cost-effective first-line treatment for osteoporosis, often given alongside calcium and vitamin D supplements. Other examples of bisphosphonates include risedronate and zoledronic acid (IV). Bisphosphonates work by binding to hydroxyapatite in bone.</p>
+    <p>Denosumab is a RANKL inhibitor and is generally considered second or third-line for osteoporosis.</p>
+    <p>Prednisolone is a corticosteroid that will worsen osteoporosis by increasing osteoclast activity and inhibiting bone formation by osteoblasts.</p>
+    <p>Tamoxifen is an oestrogen receptor blocker used in ER positive breast cancer. Its effects on oestrogen are different in other tissues however, so it is unclear whether it preserves or increases bone loss; studies have shown this differs in whether the woman is premenopausal or postmenopausal.</p>
+  </div>
+</div>
+
+<!-- Question 39 -->
+<div class="question">
+  <p><strong>39) Which of the following examination findings in a 50 year old woman are most likely to be breast cancer?</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, false)">A warm, red, swollen, lump that is tender upon touch</button>
+  <button class="option" onclick="selectAnswer(this, false)">A smooth, firm, highly movable lump found in the upper outer quadrant of the breast</button>
+  <button class="option" onclick="selectAnswer(this, false)">A soft smooth movable lump on the underside of the breast that is nontender and rubbery in texture</button>
+    <button class="option" onclick="selectAnswer(this, true)">A hard immovable lump with an irregular border, with some skin changes and is nontender upon touch</button>
+
+
+  <div class="feedback" style="display:none;">
+    <p>Features that can indicate malignancy in breast lumps include irregular shape, hard/firm consistency, fixation to skin (immobility), changes over time, nontenderness, skin changes (such as peau d’orange), bloodstained discharge and nipple retraction.</p>
+    <p>Therefore a hard immovable lump with an irregular border, with some skin changes and is nontender upon touch would raise suspicions and warrant further investigation of lymph nodes and a mammogram.</p>
+<p>A soft smooth movable lump on the underside of the breast that is nontender and rubbery in texture is likely to be a breast cyst or a lipoma. </p>
+<p>A warm, red, swollen, lump that is tender upon touch is likely to be mastitis or potentially a breast abscess. </p>
+<p>A smooth, firm, highly movable lump found in the upper outer quadrant of the breast is most likely to be a fibroadenoma. This is the most common cause of a breast lump and although the upper outer quadrant is the most common location of breast cancer, it is the most common location of a fibroadenoma too.</p>
+
+  </div>
+</div>
+
+<!-- Question 40 -->
+<div class="question">
+  <p><strong>40) Which of the following is the primary drainage pathway for breast tissue and cancers?</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, false)">Paraaortic lymph nodes</button>
+  <button class="option" onclick="selectAnswer(this, true)">Axillary lymph nodes</button>
+  <button class="option" onclick="selectAnswer(this, false)">Cervical lymph nodes</button>
+  <button class="option" onclick="selectAnswer(this, false)">Parasternal lymph nodes</button>
+
+  <div class="feedback" style="display:none;">
+    <p>Axillary lymph nodes primarily drain the breast (around 75%). Parasternal lymph nodes drain the second most.</p>
+    <p>Paraaortic lymph nodes drain the abdomen, gonads and kidneys.</p>
+    <p>Cervical lymph nodes drain the head and neck.</p>
+  </div>
+</div>
+<!-- Question 41 -->
+<div class="question">
+  <p><strong>41) Which of the following is not a clinical manifestation of cystic fibrosis?</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, false)">Diabetes</button>
+  <button class="option" onclick="selectAnswer(this, false)">Meconium Ileus</button>
+  <button class="option" onclick="selectAnswer(this, false)">Sperm Infertility</button>
+  <button class="option" onclick="selectAnswer(this, true)">Aphthous Ulcers</button>
+
+  <div class="feedback" style="display:none;">
+    <p>Aphthous ulcers are mouth ulcers and are common in the general population but not necessarily linked to CF. Even if you do not know what aphthous ulcers are, try answer these types of questions via process of elimination. However, as a rule of thumb for future exams the answer is usually not the one you have never heard of.</p>
+    <p>Diabetes occurs due to pancreatic blockage from thick mucus.</p>
+    <p>Meconium ileus is an abnormally thick, sticky first stool from a newborn. 90% of the time it occurs due to CF, as the sticky mucus prevents water from thinning the stool. It is one of the first manifestations of CF.</p>
+    <p>Sperm infertility occurs in CF due to congenital bilateral absence of the vas deferens (spermatic duct). Sperm production is normal but there is no sperm canal.</p>
+  </div>
+</div>
+
+<!-- Question 42 -->
+<div class="question">
+  <p><strong>42) Which of the following processes involve:</strong></p>
+  <p>An extrinsic pathway where death ligands such as TNFa and FasL bind to cell surface membranes</p>
+  <p>An intrinsic pathway where BAX proteins trigger mitochondrial release of cytochrome c</p>
+
+  <button class="option" onclick="selectAnswer(this, false)">Necrosis</button>
+  <button class="option" onclick="selectAnswer(this, false)">Autophagy</button>
+    <button class="option" onclick="selectAnswer(this, true)">Apoptosis</button>
+
+  <button class="option" onclick="selectAnswer(this, false)">Entosis</button>
+
+  <div class="feedback" style="display:none;">
+    <p>Apoptosis is programmed, controlled cell death by the 2 main routes that converge to activate caspases which are cell death messengers.</p>
+    <p>Necrosis is messy, uncontrolled, unintentional cell death</p>
+    <p>Autophagy is degradation of cellular componenents within autophagosomes (self-eating).</p>
+    <p>Entosis is a form of cell cannibalism where one cell engulfs a neighbouring cell in a programmed manner. The engulfed cell dies.</p>
+  </div>
+</div>
+
+<!-- Question 43 -->
+<div class="question">
+  <p><strong>43) A 16 week pregnant woman has a family history of Down’s syndrome and would like definitive testing for her baby. Which of the following investigations should be done?</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, false)">Chorionic Villus Sampling</button>
+  <button class="option" onclick="selectAnswer(this, true)">Amniocentesis</button>
+  <button class="option" onclick="selectAnswer(this, false)">Combined test</button>
+  <button class="option" onclick="selectAnswer(this, false)">Quadruple test</button>
+
+  <div class="feedback" style="display:none;">
+    <p>The pregnancy is too late for Chorionic Villus Sampling (10-13 weeks) so an amniocentesis (15-18 weeks) is the most appropriate definitive investigation. The combined test and quadruple test are both not definitive.</p>
+  </div>
+</div>
+
+<!-- Question 44 -->
+<div class="question">
+  <p><strong>44) The following slide shows the histology of which organ?</strong></p>
+
+  <img src="ovary.png" alt="Histology slide" style="max-width:100%; margin:10px 0;">
+
+  <button class="option" onclick="selectAnswer(this, true)">Ovary</button>
+  <button class="option" onclick="selectAnswer(this, false)">Fallopian tube</button>
+  <button class="option" onclick="selectAnswer(this, false)">Cervix</button>
+  <button class="option" onclick="selectAnswer(this, false)">Vagina</button>
+
+  <div class="feedback" style="display:none;">
+    <p>Here a multilaminar primary follicle can be seen on the left alongside a couple of primordial follicles on the right. These follicles are distinctly only seen in ovaries.</p>
+    <p>A fallopian tube would have a multi-pronged shaped lumen lined by simple columnar epithelium containing ciliated peg cells. There would be 3 distinct layers: mucosa, muscularis and serosa.</p>
+    <p>Ectocervix has stratified squamous epitheium which transitions to inner endocervix which is lined by mucus-producing columnar epithelium. Cervix will always appear as a border to a wide lumen. </p>
+    <p>The vagina's histology features a non-keratinized stratified squamous epithelium over a lamina propria and a muscularis layer.  </p>
+  </div>
+</div>
+
+<!-- Question 45 -->
+<div class="question">
+  <p><strong>45) Which structure is at risk of damage during an oophorectomy (removal of the ovaries) due its close proximity to the ovaries?</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, false)">Uterine artery</button>
+  <button class="option" onclick="selectAnswer(this, false)">External iliac artery</button>
+  <button class="option" onclick="selectAnswer(this, false)">Left Renal vein</button>
+    <button class="option" onclick="selectAnswer(this, true)">Ureter</button>
+
+
+  <div class="feedback" style="display:none;">
+    <p>The ureter passes very close to the ovary as it travels through the pelvic brim beneath the ovarian vessels</p>
+    <p>The left renal vein runs much more superior at L1</p>
+    <p>The uterine artery runs very close to the ureter near the cervix and here the ureter is at risk during hysterectomy (removal of the uterus) instead.</p>
+    <p>The external iliac artery is not within the surgical field of the ovary. It is hard to picture, this is a tricky but textbook question (it came up when I was in Y1 and I got it wrong)</p>
+  </div>
+</div>
+
+<!-- Question 46 -->
+<div class="question">
+  <p><strong>46) Which of the following events occurs first in a normal human embryo?</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, false)">Sex differentiation</button>
+  <button class="option" onclick="selectAnswer(this, true)">Closure of the neural tube</button>
+  <button class="option" onclick="selectAnswer(this, false)">Appearance of limb buds</button>
+  <button class="option" onclick="selectAnswer(this, false)">Rotation of the gut</button>
+
+  <div class="feedback" style="display:none;">
+    <p>The closure of the neural tube occurs around week 3.</p>
+    <p>Limb buds appear around week 5-6</p>
+    <p>Rotation of the gut occurs from weeks 6-10</p>
+    <p>Sex differentiation occurs after week 7.</p>
+  </div>
+</div>
+
+<!-- Question 47 -->
+<div class="question">
+  <p><strong>47) A patent foramen ovale is often asymptomatic but can cause certain complications. Which of the following is a potential complication from a patent foramen ovale?</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, true)">Clot travelling from the right to the left side of the heart causing a stroke</button>
+  <button class="option" onclick="selectAnswer(this, false)">Right ventricular hypertrophy due to a hardened pulmonary valve</button>
+  <button class="option" onclick="selectAnswer(this, false)">Regurgitation of the mitral valve</button>
+  <button class="option" onclick="selectAnswer(this, false)">Deoxygenated blood travelling to the lungs</button>
+
+  <div class="feedback" style="display:none;">
+    <p>You should know that a patent foramen ovale connects the right and left atria. Therefore a clot travelling from the right to the left side of the heart is the only option that aligns with this condition. This is known as a paradoxical embolism where a blood clot from the venous system (like in a DVT) travels into the arterial system by skipping the lungs via the patent foramen ovale.</p>
+    <p>Right ventricular hypertrophy occurring due to a hardened pulmonary valve is known as pulmonary stenosis.</p>
+    <p>Regurgitation of the mitral valve is mitral regurgitation</p>
+    <p>Deoxygenated blood in the lungs is a normal physiological event.</p>
+  </div>
+</div>
+
+<!-- Question 48 -->
+<div class="question">
+  <p><strong>48) Which of the following timelines of spermatogenesis are in the correct order?</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, false)">Spermatogonium, Primary Spermatocyte, Secondary Spermatocyte, Spermatozoa, Spermatid</button>
+  <button class="option" onclick="selectAnswer(this, false)">Primary Spermatocyte, Secondary Spermatocyte, Spermatogonium Spermatid, Spermatozoa</button>
+  <button class="option" onclick="selectAnswer(this, false)">Spermatid, Spermatogonium, Spermatozoa, Primary Spermatocyte, Secondary Spermatocyte,</button>
+    <button class="option" onclick="selectAnswer(this, true)">Spermatogonium, Primary Spermatocyte, Secondary Spermatocyte, Spermatid, Spermatozoa</button>
+
+
+  <div class="feedback" style="display:none;">
+    <p>Knowledge recall</p>
+  </div>
+</div>
+
+<!-- Question 49 -->
+<div class="question">
+  <p><strong>49) Which cells are the first in the spermatogenesis lineage to become haploid cells?</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, false)">Primary Spermatocytes</button>
+  <button class="option" onclick="selectAnswer(this, false)">Spermatids</button>
+    <button class="option" onclick="selectAnswer(this, true)">Secondary Spermatocytes</button>
+
+  <button class="option" onclick="selectAnswer(this, false)">Spermatozoa</button>
+
+  <div class="feedback" style="display:none;">
+    <p>The process of meiosis I is where chromosome number halves and haploid cells are first seen. Diploid primary spermatocytes (2n) undergo meiosis I to produce haploid secondary spermatocytes (1n). These then undergo meiosis II to produce double the number of spermatids (1n) which mature into spermatozoa (sperm cells).</p>
+  </div>
+</div>
+
+<!-- Question 50 -->
+<div class="question">
+  <p><strong>50) In males, which hormone primarily increases testosterone production?</strong></p>
+
+  <button class="option" onclick="selectAnswer(this, true)">Luteinizing Hormone</button>
+  <button class="option" onclick="selectAnswer(this, false)">Testosterone by positive feedback</button>
+  <button class="option" onclick="selectAnswer(this, false)">Follicle stimulating hormone</button>
+  <button class="option" onclick="selectAnswer(this, false)">Insulin-like growth factor 1</button>
+
+  <div class="feedback" style="display:none;">
+    <p>Luteinizing hormone acts directly on Leydig cells in the testes to produce testosterone</p>
+    <p>Testosterone normally boosts IGF1, so the other way around</p>
+    <p>FSH primarily stimulates sperm production in males</p>
+    <p>Testosterone is primarily regulated through negative feedback. High testosterone levels inhibits its own release.</p>
+  </div>
+</div>
+<div id="final-score" style="display:none; text-align:center; margin:40px 0; padding:20px; border-top:2px solid #ccc;">
+</div>
+<button id="next-btn" style="display:none; margin:20px auto; padding:10px 15px;">
+  Next Question
+</button>
+
+<!-- FINAL SCORE -->
+<div id="final-score"></div>
+
+</body>
+</html>
