@@ -2,68 +2,162 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Manchester Medicine – Semester 1 Mini Mock</title>
+<title>Manchester Medicine Year 2 – Semester 3 Mini Mock</title>
 
 <style>
+/* Base font & colors */
+html, body, div, p, span, strong, b, button, h1, h2, h3, h4 {
+    font-family: Arial, Helvetica, sans-serif !important;
+    color: #333;
+}
+
+strong, b {
+    font-weight: bold;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  max-width: 900px;
-  margin: auto;
-  padding: 20px;
-  line-height: 1.6;
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+    line-height: 1.6;
+    background-color: #f4f4f4;
 }
 
+/* Headers */
 h1 {
-  text-align: center;
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+h4 {
+    text-align: center;
+    font-weight: normal;
+    color: #555;
+    margin-bottom: 40px;
 }
 
+/* Quiz container */
+#quiz-container {
+    width: 100%;
+}
+
+/* Question card */
 .question {
-  display: none;
-  border: 1px solid #ddd;
-  padding: 15px;
-  margin-bottom: 25px;
-  border-radius: 8px;
+    display: none;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 30px;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
 }
-
 .question.active {
-  display: block;
+    display: block;
+}
+.question:hover {
+    transform: translateY(-2px);
 }
 
+/* Question text */
+.question p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+/* Options buttons */
 .option {
-  display: block;
-  margin: 6px 0;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  background: #f9f9f9;
-  cursor: pointer;
+    display: block;
+    width: 100%;
+    padding: 12px 15px;
+    margin: 8px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background: #f9f9f9;
+    cursor: pointer;
+    text-align: left;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+}
+
+.option:hover:not(.locked) {
+    background: #e0f7fa;
+    border-color: #00bcd4;
 }
 
 .option.correct {
-  background: #d1fae5;
-  border-color: #22c55e;
+    background: #d4edda;
+    border-color: #28a745;
 }
 
 .option.wrong {
-  background: #fee2e2;
-  border-color: #ef4444;
+    background: #f8d7da;
+    border-color: #dc3545;
 }
 
 .option.locked {
-  cursor: not-allowed;
-  opacity: 0.85;
+    cursor: not-allowed;
+    opacity: 0.8;
 }
 
+/* Feedback */
 .feedback {
-  margin-top: 10px;
-  padding: 10px;
-  border-top: 1px solid #ccc;
-  display: none;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    display: none;
+    font-size: 0.95rem;
+    color: #555;
 }
 
+/* Progress bar */
+#progress {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #555;
+}
+
+/* Next button */
+#next-btn {
+    display: none;
+    background-color: #0288d1;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 20px 0;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+#next-btn:hover {
+    background-color: #0277bd;
+}
+
+/* Final score */
 #final-score {
-  display: none;
-  text-align: center;
+    display: none;
+    text-align: center;
+}
+#final-score h2 {
+    color: #0288d1;
+}
+#final-score p {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Responsive */
+@media screen and (max-width: 600px) {
+    .question {
+        padding: 20px;
+    }
+    .option {
+        font-size: 0.9rem;
+        padding: 10px 12px;
+    }
 }
 </style>
 
@@ -74,70 +168,75 @@ const questions = [];
 let nextBtn;
 
 window.onload = () => {
-  document.querySelectorAll(".question").forEach(q => questions.push(q));
-  questions[0].classList.add("active");
-  nextBtn = document.getElementById("next-btn");
+    document.querySelectorAll(".question").forEach(q => questions.push(q));
+    questions[0].classList.add("active");
+    nextBtn = document.getElementById("next-btn");
+    updateProgress();
 };
 
 function selectAnswer(option, isCorrect) {
-  const question = option.closest(".question");
-  if (question.dataset.answered === "true") return;
+    const question = option.closest(".question");
+    if (question.dataset.answered === "true") return;
+    question.dataset.answered = "true";
 
-  question.dataset.answered = "true";
+    if (isCorrect) {
+        score++;
+        option.classList.add("correct");
+    } else {
+        option.classList.add("wrong");
+    }
 
-  if (isCorrect) {
-    score++;
-    option.classList.add("correct");
-  } else {
-    option.classList.add("wrong");
-  }
+    question.querySelectorAll(".option").forEach(btn => {
+        btn.classList.add("locked");
+        btn.disabled = true;
+    });
 
-  question.querySelectorAll(".option").forEach(btn => {
-    btn.classList.add("locked");
-    btn.disabled = true;
-  });
+    const feedback = question.querySelector(".feedback");
+    if (feedback) feedback.style.display = "block";
 
-  question.querySelector(".feedback").style.display = "block";
-  nextBtn.style.display = "block";
+    nextBtn.style.display = "block";
 }
 
-document.addEventListener("click", function (e) {
-  if (e.target && e.target.id === "next-btn") {
-    questions[currentQuestion].classList.remove("active");
-    currentQuestion++;
-    nextBtn.style.display = "none";
+document.addEventListener("click", function(e) {
+    if (e.target && e.target.id === "next-btn") {
+        questions[currentQuestion].classList.remove("active");
+        currentQuestion++;
+        nextBtn.style.display = "none";
 
-    if (currentQuestion < questions.length) {
-      questions[currentQuestion].classList.add("active");
-    } else {
-      showFinalScore();
+        if (currentQuestion < questions.length) {
+            questions[currentQuestion].classList.add("active");
+            updateProgress();
+        } else {
+            showFinalScore();
+        }
     }
-  }
 });
 
-function showFinalScore() {
-  const percentage = ((score / questions.length) * 100).toFixed(0);
+function updateProgress() {
+    const progress = document.getElementById("progress");
+    progress.innerText = `Question ${currentQuestion + 1} of ${questions.length}`;
+}
 
-  document.body.innerHTML = `
-    <h1>Manchester Medicine – Semester 1 Mini Mock</h1>
-    <h2>Final Score: ${score}/${questions.length}  or  ${percentage}%</h2>
-    
-    <p><strong>Thanks so much for completing this mini mock! I really hope it was helpful. If you have any questions or feedback, please message the instagram @ManchesterHaemsoc</strong></p>
-  `;
+function showFinalScore() {
+    const percentage = ((score / questions.length) * 100).toFixed(0);
+    const container = document.getElementById("quiz-container");
+
+    container.innerHTML = `
+        <h1>Manchester Medicine Year 1 – Semester 1 Mini Mock</h1>
+        <h2>Final Score: ${score}/${questions.length} (${percentage}%)</h2>
+        <p><strong>Thanks so much for completing this mini mock! I really hope it was helpful. Wishing you guys the best for lowkey the first exam of med school. If you have any questions or feedback, please message the Instagram @ManchesterHaemsoc</strong></p>
+    `;
 }
 </script>
-
-
-
-<!-- ALL 50 QUESTIONS BELOW -->
-<!-- UNCHANGED CONTENT -->
-<!-- (Your pasted Question 1–50 blocks go here EXACTLY as provided) -->
 </head>
 
 <body>
+<h1>Manchester Medicine Year 1 – Semester 1 Mini Mock</h1>
+<h4>A realistic mock for the first Sem test in the course. Questions in the style of Manchester's exam writers. In depth explanations for each correct and incorrect answer choice. Made by Manchester HaemSoc</h4>
 
-<h1>Manchester Medicine – Semester 1 Mini Mock</h1>
-<h4>Made by Manchester HaemSoc</h4>
+<div id="quiz-container">
+
+<div id="progress"></div>
 
 <!-- ================= QUESTIONS START HERE ================= -->
 
